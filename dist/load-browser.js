@@ -25,7 +25,8 @@ exports.loadWasmInstance = async (importObj) => {
     // }
     // const res = await fetch(zbar_wasm_bin_1.default);
     if (window.location.origin.indexOf('localhost') > -1) {
-        const res = await fetch('https://dev.albertinventdev.com/header-management/zbar-angular.wasm.bin');
+        // const res = await fetch('https://dev.albertinventdev.com/header-management/zbar-angular.wasm.bin');
+        const res = await fetch('./zbar-angular.wasm.bin');
         if (!res['ok']) {
             console.error('Failed to load wasm binary file at ' + zbar_wasm_bin_1.default);
             return null;
