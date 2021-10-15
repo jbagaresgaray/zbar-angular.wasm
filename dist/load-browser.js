@@ -32,8 +32,9 @@ exports.loadWasmInstance = async (importObj) => {
             return null;
         }
         const binary = await res.arrayBuffer();
-        const module = await WebAssembly.compile(binary);
-        const output = await WebAssembly.instantiate(module, importObj);
+        // const module = await WebAssembly.compile(binary);
+        // const output = await WebAssembly.instantiate(module, importObj);
+        const output = await WebAssembly.instantiate(binary, importObj);
         return output.instance;
     } else {
         const res = await fetch(window.location.origin + '/header-management/zbar-angular.wasm.bin');
