@@ -26,13 +26,14 @@ exports.loadWasmInstance = async (importObj) => {
     // const res = await fetch(zbar_wasm_bin_1.default);
     if (window.location.origin.indexOf('localhost') > -1) {
         // const res = await fetch('https://dev.albertinventdev.com/header-management/zbar-angular.wasm.bin');
-        const res = await fetch('./zbar-angular.wasm.bin');
+        const res = await fetch('https://zbar-wasm.github.io/demo/static/media/zbar.wasm.eb11d6b8.bin');
         if (!res['ok']) {
             console.error('Failed to load wasm binary file at ' + zbar_wasm_bin_1.default);
             return null;
         }
         const binary = await res.arrayBuffer();
-        const output = await WebAssembly.instantiate(binary, importObj);
+        const module = await WebAssembly.compile(binary);
+        const output = await WebAssembly.instantiate(module, importObj);
         return output.instance;
     } else {
         const res = await fetch(window.location.origin + '/header-management/zbar-angular.wasm.bin');
